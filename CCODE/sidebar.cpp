@@ -13,3 +13,13 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent)
     m_layout->addWidget(w1);
     m_layout->addWidget(w2);
 }
+
+SideBar* SideBar::m_instance = 0;
+
+SideBar* SideBar::instance(QWidget *parent) {
+    if (!m_instance) {
+        m_instance = new SideBar(parent);
+    }
+
+    return m_instance;
+}

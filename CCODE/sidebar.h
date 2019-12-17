@@ -8,10 +8,12 @@ class SideBar : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SideBar(QWidget *parent = nullptr);
+    static SideBar* instance(QWidget *parent = nullptr);
 
 signals:
 private:
+    explicit SideBar(QWidget *parent = nullptr);
+    static SideBar* m_instance;
     QSizePolicy m_sizePolicy;
     QBoxLayout* m_layout;
 };

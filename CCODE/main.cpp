@@ -17,10 +17,11 @@ int main(int argc, char *argv[])
 
     CodeEditor* codeEditor = CodeEditor::instance();
     Editor* editor = new Editor();
+
     codeEditor->addEditor(editor);
     codeEditor->addEditor(new Editor());
 
-    SideBar* sideBar = new SideBar();
+    SideBar* sideBar = SideBar::instance();
 
     QBoxLayout layaout(QBoxLayout::LeftToRight, w.centralWidget());
 
