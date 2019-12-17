@@ -7,7 +7,7 @@ CodeEditor::CodeEditor(QBoxLayout::Direction dir, QWidget *parent) : QBoxLayout(
 
 CodeEditor* CodeEditor::m_instance = 0;
 
-CodeEditor* CodeEditor::rade(QWidget *parent)
+CodeEditor* CodeEditor::instance(QWidget *parent)
 {
     if (!m_instance)
     {

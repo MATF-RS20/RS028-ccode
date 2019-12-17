@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.setWindowTitle("CCODE");
 
-    CodeEditor* codeEditor = CodeEditor::rade();
+    CodeEditor* codeEditor = CodeEditor::instance();
     Editor* editor = new Editor();
     codeEditor->addEditor(editor);
     codeEditor->addEditor(new Editor());

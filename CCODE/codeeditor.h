@@ -11,7 +11,7 @@ class CodeEditor : public QBoxLayout
 {
     Q_OBJECT
 public:
-    static CodeEditor* rade(QWidget *parent = nullptr);
+    static CodeEditor* instance(QWidget *parent = nullptr);
 
     void addEditor(Editor* editor);
     std::vector<Editor*> editors();
