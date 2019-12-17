@@ -29,25 +29,4 @@ private:
     QWidget *m_lineNumberArea;
 };
 
-class LineNumberArea : public QWidget
-{
-public:
-    LineNumberArea(Editor *editor) : QWidget(editor) {
-        m_editor = editor;
-    }
-
-    QSize sizeHint() const {
-        return QSize(m_editor->lineNumberAreaWidth(), 0);
-    }
-
-protected:
-    void paintEvent(QPaintEvent *event) {
-        m_editor->lineNumberAreaPaintEvent(event);
-    }
-
-private:
-    Editor *m_editor;
-};
-
-
 #endif
