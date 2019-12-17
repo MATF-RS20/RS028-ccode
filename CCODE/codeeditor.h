@@ -1,15 +1,28 @@
 #ifndef CODEEDITOR_H
 #define CODEEDITOR_H
 
+#include <vector>
+#include <algorithm>
 #include <QWidget>
+#include <QBoxLayout>
+#include "editor.h"
 
-class CodeEditor : public QWidget
+class CodeEditor : public QBoxLayout
 {
     Q_OBJECT
 public:
-    explicit CodeEditor(QWidget *parent = nullptr);
+    static CodeEditor* rade(QWidget *parent = nullptr);
+
+    void addEditor(Editor* editor);
+    std::vector<Editor*> editors();
+    void setActive(Editor* editor);
 
 signals:
+private:
+    explicit CodeEditor(QBoxLayout::Direction dir, QWidget *parent = nullptr);
+    static CodeEditor* m_instance;
+    std::vector<Editor*> m_editors;
+    Editor* m_active;
 
 };
 
