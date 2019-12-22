@@ -22,6 +22,7 @@ SOURCES += \
     linenumberarea.cpp \
     main.cpp \
     mainwindow.cpp \
+    opendocuments.cpp \
     sidebar.cpp
 
 HEADERS += \
@@ -29,6 +30,7 @@ HEADERS += \
     editor.h \
     linenumberarea.h \
     mainwindow.h \
+    opendocuments.h \
     sidebar.h
 
 FORMS += \

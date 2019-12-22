@@ -12,18 +12,18 @@ class CodeEditor : public QBoxLayout
     Q_OBJECT
 public:
     static CodeEditor* instance(QWidget *parent = nullptr);
+    ~CodeEditor();
 
-    void addEditor(Editor* editor);
+    void addEditor(Editor *editor);
     std::vector<Editor*> editors();
-    void setActive(Editor* editor);
+    void setActive(Editor *editor);
 
 signals:
 private:
     explicit CodeEditor(QBoxLayout::Direction dir, QWidget *parent = nullptr);
     static CodeEditor* m_instance;
     std::vector<Editor*> m_editors;
-    Editor* m_active;
-
+    Editor *m_active = nullptr;
 };
 
 #endif // CODEEDITOR_H

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QBoxLayout>
+#include "opendocuments.h"
 
 class SideBar : public QWidget
 {
@@ -16,6 +17,7 @@ private:
     static SideBar* m_instance;
     QSizePolicy m_sizePolicy;
     QBoxLayout* m_layout;
+    OpenDocuments* m_openDocuments;
 };
 
 #endif // SIDEBAR_H

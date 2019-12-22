@@ -3,7 +3,7 @@
 
 #include <QPlainTextEdit>
 #include <QWidget>
-#include <Qpainter>
+#include <QPainter>
 #include <QTextBlock>
 #include "linenumberarea.h"
 
@@ -12,10 +12,11 @@ class Editor : public QPlainTextEdit
     Q_OBJECT
 
 public:
-    Editor(QWidget *parent = 0);
+    Editor(std::string path = "", QWidget *parent = 0);
 
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
+    std::string name() const;
 
 protected:
     void resizeEvent(QResizeEvent *event);
@@ -27,6 +28,8 @@ private slots:
 
 private:
     QWidget *m_lineNumberArea;
+    std::string m_path;
+    std::string m_name;
 };
 
 #endif

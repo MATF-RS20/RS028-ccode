@@ -1,8 +1,13 @@
 #include "codeeditor.h"
 
-CodeEditor::CodeEditor(QBoxLayout::Direction dir, QWidget *parent) : QBoxLayout(dir, parent)
+CodeEditor::CodeEditor(QBoxLayout::Direction dir, QWidget *parent)
+    : QBoxLayout(dir, parent)
 {
 
+}
+
+CodeEditor::~CodeEditor() {
+    std::for_each(m_editors.begin(), m_editors.end(), [](Editor* e){ delete e; });
 }
 
 CodeEditor* CodeEditor::m_instance = 0;
