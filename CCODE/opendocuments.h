@@ -8,17 +8,20 @@
 #include <QListWidget>
 #include "codeeditor.h"
 
-class OpenDocuments : public QWidget
+class OpenDocuments : public QListWidget
 {
     Q_OBJECT
 public:
 
-    static OpenDocuments* instance(QWidget *parent = nullptr);
+    static OpenDocuments* instance(QListWidget *parent = nullptr);
 
 signals:
 
+private slots:
+    void changeActiveEditor(QListWidgetItem *item);
+
 private:
-    explicit OpenDocuments(QWidget *parent = nullptr);
+    explicit OpenDocuments(QListWidget *parent = nullptr);
     static OpenDocuments* m_instance;
 
     QBoxLayout* m_documents;

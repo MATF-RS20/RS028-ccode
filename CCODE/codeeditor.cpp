@@ -41,3 +41,7 @@ void CodeEditor::setActive(Editor *editor) {
     m_active = editor;
     editor->setVisible(true);
 }
+
+Editor* CodeEditor::active() {
+    return m_active;
+}

@@ -17,6 +17,7 @@ public:
     void addEditor(Editor *editor);
     std::vector<Editor*> editors();
     void setActive(Editor *editor);
+    Editor* active();
 
 signals:
 private:

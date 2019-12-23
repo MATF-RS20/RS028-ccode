@@ -2,11 +2,13 @@
 
 Editor::Editor(std::string path, QWidget *parent)
     : QPlainTextEdit(parent),
+      QListWidgetItem(),
       m_lineNumberArea(new LineNumberArea(this)),
       m_path(path)
 {
 
     m_name = !path.empty() ? path : "United"; //TODO: extract base file name from file path
+    setText(QString::fromStdString(m_name));
 
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
@@ -100,5 +102,3 @@ void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
 std::string Editor::name() const {
     return m_name;
 }
-
-

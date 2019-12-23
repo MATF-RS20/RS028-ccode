@@ -5,9 +5,10 @@
 #include <QWidget>
 #include <QPainter>
 #include <QTextBlock>
+#include <QListWidgetItem>
 #include "linenumberarea.h"
 
-class Editor : public QPlainTextEdit
+class Editor : public QPlainTextEdit, public QListWidgetItem
 {
     Q_OBJECT
 

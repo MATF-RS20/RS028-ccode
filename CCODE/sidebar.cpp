@@ -7,7 +7,7 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent)
     setSizePolicy(m_sizePolicy);
     m_layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
 
-    m_openDocuments = OpenDocuments::instance(this);
+    m_openDocuments = OpenDocuments::instance();
 
     m_layout->addWidget(m_openDocuments);
 }
