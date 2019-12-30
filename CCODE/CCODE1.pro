@@ -20,6 +20,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 
+
+
 SOURCES += \
     codeeditor.cpp \
     editor.cpp \
@@ -27,7 +29,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     opendocuments.cpp \
-    sidebar.cpp
+    sidebar.cpp \
+    semantic.cpp
 
 HEADERS += \
     codeeditor.h \
@@ -35,7 +38,8 @@ HEADERS += \
     linenumberarea.h \
     mainwindow.h \
     opendocuments.h \
-    sidebar.h
+    sidebar.h \
+    semantic.hpp
 
 FORMS += \
     mainwindow.ui
@@ -44,6 +48,5 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
 
 
