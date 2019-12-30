@@ -20,7 +20,11 @@ WS  [ \t\v\f]
 //({SP}?\"([^"\\\n]|{ES})*\"{WS}*)+	{ return STRING_LITERAL; }
 #include <iostream>
 #include "semantic.hpp"
+<<<<<<< HEAD
 #include "parser.h"
+=======
+#include "parser.tab.hpp"
+>>>>>>> 58c8080627ad54ad116b0d5fcd0fb4d71ebe44b5
 #include <vector>
 
 int lineNum=1;

@@ -11,14 +11,22 @@ void Include_declaration::ispis(int d) const{
 void Other_declaration::ispis(int d) const{
     for (int j = 0; j < d; j++)
     std::cout << "\t";
+<<<<<<< HEAD
     for(unsigned i=0; i<_v.size(); i++){
+=======
+    for(int i=0; i<_v.size(); i++){
+>>>>>>> 58c8080627ad54ad116b0d5fcd0fb4d71ebe44b5
         _v[i]->ispis(d);
     }
 }
 
 
 Other_declaration::~Other_declaration(){
+<<<<<<< HEAD
     for(unsigned i=0; i<_v.size(); i++){
+=======
+    for(int i=0; i<_v.size(); i++){
+>>>>>>> 58c8080627ad54ad116b0d5fcd0fb4d71ebe44b5
         delete _v[i];
     }
 }
@@ -29,7 +37,11 @@ void Function_declaration::ispis(int d) const{
     _f->ispis(d);
     std::cout << '(';
     if (_v.size() !=0){
+<<<<<<< HEAD
         unsigned i=0;
+=======
+        int i=0;
+>>>>>>> 58c8080627ad54ad116b0d5fcd0fb4d71ebe44b5
         for(i=0; i<_v.size()-1; i++){
             _v[i]->ispis(d);
             std::cout << ", ";
@@ -83,7 +95,11 @@ void Declaration::ispis(int d) const{
     std::cout << "\t";
     _d->ispis(d);
     if (_v.size() !=0){
+<<<<<<< HEAD
         unsigned i;
+=======
+        int i;
+>>>>>>> 58c8080627ad54ad116b0d5fcd0fb4d71ebe44b5
         for(i=0; i<_v.size()-1; i++){
             _v[i]->ispis(d);
             std::cout << ", ";
@@ -96,7 +112,11 @@ void Declaration::ispis(int d) const{
 
 void Block_item_list::ispis(int d) const{
     std::cout << '{' << std::endl;              //TODO razlicite notacije
+<<<<<<< HEAD
     for(unsigned i=0; i<_v.size(); i++){
+=======
+    for(int i=0; i<_v.size(); i++){
+>>>>>>> 58c8080627ad54ad116b0d5fcd0fb4d71ebe44b5
         _v[i]->ispis(d+1);
     }                             //TODO ako je _d prazno?
     for (int j = 0; j < d; j++)
@@ -110,7 +130,11 @@ void Case::ispis(int d) const{
         std::cout << "\t";
     std::cout << "case ";
     _d1->ispis(d);
+<<<<<<< HEAD
     std::cout << ":";
+=======
+    std::cout << ":\n";
+>>>>>>> 58c8080627ad54ad116b0d5fcd0fb4d71ebe44b5
     _d2->ispis(d+1);
 }
 
@@ -207,7 +231,11 @@ void For_expression::ispis(int d) const{
 void For_declaration::ispis(int d) const{
     _d->ispis(d);
     if (_v.size() !=0){
+<<<<<<< HEAD
         unsigned i;
+=======
+        int i;
+>>>>>>> 58c8080627ad54ad116b0d5fcd0fb4d71ebe44b5
         for(i=0; i<_v.size()-1; i++){
             _v[i]->ispis(d);
             std::cout << ", ";
@@ -418,7 +446,11 @@ void Sizeof_type::ispis(int d) const{
 void Function_caller::ispis(int d) const{
     std::cout << _s << "(";
     if (_v.size() !=0){
+<<<<<<< HEAD
         unsigned i;
+=======
+        int i;
+>>>>>>> 58c8080627ad54ad116b0d5fcd0fb4d71ebe44b5
         for(i=0; i<_v.size()-1; i++){
             _v[i]->ispis(d);
             std::cout << ", ";
