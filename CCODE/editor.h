@@ -8,6 +8,7 @@
 #include <QListWidgetItem>
 #include "linenumberarea.h"
 
+
 class Editor : public QPlainTextEdit, public QListWidgetItem
 {
     Q_OBJECT
@@ -26,6 +27,7 @@ private slots:
     void updateLineNumberAreaWidth(int newBlockCount);
     void highlightCurrentLine();
     void updateLineNumberArea(const QRect &, int);
+    void parser();
 
 private:
     QWidget *m_lineNumberArea;
