@@ -7,6 +7,7 @@
 #include <QBoxLayout>
 #include "editor.h"
 
+
 class CodeEditor : public QBoxLayout
 {
     Q_OBJECT

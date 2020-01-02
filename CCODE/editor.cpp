@@ -103,12 +103,11 @@ void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
 std::string Editor::name() const {
     return m_name;
 }
-
 void Editor::parser(){
 
-//    QString str("#include <aaa>");
-//    YY_BUFFER_STATE bufferState = yy_scan_string(str.toUtf8().constData());
-//    yyparse();
+    QString str("#include <aaa>");
+    YY_BUFFER_STATE bufferState = yy_scan_string(str.toUtf8().constData());
+    yyparse();
 
-//    yy_delete_buffer(bufferState);
+    yy_delete_buffer(bufferState);
 }
