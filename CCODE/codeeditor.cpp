@@ -3,7 +3,7 @@
 CodeEditor::CodeEditor(QBoxLayout::Direction dir, QWidget *parent)
     : QBoxLayout(dir, parent)
 {
-
+    highlighter=new Highlighter();
 }
 
 CodeEditor::~CodeEditor() {
@@ -40,6 +40,7 @@ void CodeEditor::setActive(Editor *editor) {
     m_active->setVisible(false);
     m_active = editor;
     editor->setVisible(true);
+    highlighter->setDocument(editor->document());
 }
 
 Editor* CodeEditor::active() {
