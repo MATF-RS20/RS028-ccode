@@ -6,6 +6,7 @@
 #include <QWidget>
 #include <QBoxLayout>
 #include "editor.h"
+#include "highlighter.h"
 
 class CodeEditor : public QBoxLayout
 {
@@ -25,6 +26,8 @@ private:
     static CodeEditor* m_instance;
     std::vector<Editor*> m_editors;
     Editor *m_active = nullptr;
+    Highlighter *highlighter;
+
 };
 
 #endif // CODEEDITOR_H
