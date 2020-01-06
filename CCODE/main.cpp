@@ -4,9 +4,11 @@
 #include <QBoxLayout>
 #include <QSizePolicy>
 
+
 #include "editor.h"
 #include "sidebar.h"
 #include "codeeditor.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +18,7 @@ int main(int argc, char *argv[])
 
     CodeEditor* codeEditor = CodeEditor::instance();
     Editor* editor = new Editor();
+
 
     codeEditor->addEditor(editor);
     codeEditor->addEditor(new Editor());
