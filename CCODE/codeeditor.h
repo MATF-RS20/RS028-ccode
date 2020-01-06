@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <QWidget>
 #include <QBoxLayout>
+#include <QStringListModel>
+#include <QGuiApplication>
 #include "editor.h"
 #include "highlighter.h"
 
@@ -27,6 +29,9 @@ private:
     std::vector<Editor*> m_editors;
     Editor *m_active = nullptr;
     Highlighter *highlighter;
+
+    QCompleter *completer =nullptr;
+    QAbstractItemModel *modelFromFile(const QString& fileName);
 
 };
 
