@@ -35,6 +35,8 @@ void CodeEditor::addEditor(Editor *editor)
     m_editors.push_back(editor);
     addWidget(editor);
     m_active = editor;
+    highlighter->setDocument(editor->document());
+    m_active->setCompleter(completer);
 }
 
 std::vector<Editor*> CodeEditor::editors() {
