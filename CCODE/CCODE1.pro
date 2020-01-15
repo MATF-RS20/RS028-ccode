@@ -6,6 +6,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
 
+
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -30,6 +31,7 @@ OTHER_FILES +=  \
 SOURCES += \
     codeeditor.cpp \
     editor.cpp \
+    highlighter.cpp \
     linenumberarea.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -39,6 +41,7 @@ SOURCES += \
 HEADERS += \
     codeeditor.h \
     editor.h \
+    highlighter.h \
     linenumberarea.h \
     mainwindow.h \
     opendocuments.h \
@@ -46,11 +49,16 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui
+    
+RESOURCES += \
+    resources.qrc
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
 
 
 flexsource.input = FLEXSOURCES
@@ -88,3 +96,5 @@ bisonheader.name = Bison Headers ${QMAKE_FILE_IN}
 bisonheader.CONFIG += target_predeps no_link
 
 QMAKE_EXTRA_COMPILERS += bisonheader
+
+
