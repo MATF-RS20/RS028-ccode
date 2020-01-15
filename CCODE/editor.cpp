@@ -106,13 +106,13 @@ std::string Editor::name() const {
 
 void Editor::parser(){
 
-    QString str("#include <aaa>");
+    QString str(this->toPlainText());
     YY_BUFFER_STATE bufferState = yy_scan_string(str.toUtf8().constData());
     yyparse();
 
     yy_delete_buffer(bufferState);
 
-
+}
 
 void Editor::setCompleter(QCompleter *completer)
 {
