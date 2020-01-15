@@ -9,7 +9,6 @@
 #include "linenumberarea.h"
 #include "parser.h"
 #include "lexer.h"
-#include "semantic.hpp"
 
 
 class Editor : public QPlainTextEdit, public QListWidgetItem

@@ -34,8 +34,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     opendocuments.cpp \
-    sidebar.cpp \
-    semantic.cpp
+    sidebar.cpp
 
 HEADERS += \
     codeeditor.h \
@@ -43,8 +42,7 @@ HEADERS += \
     linenumberarea.h \
     mainwindow.h \
     opendocuments.h \
-    sidebar.h \
-    semantic.hpp
+    sidebar.h
 
 FORMS += \
     mainwindow.ui
