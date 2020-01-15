@@ -13,6 +13,7 @@ Editor::Editor(std::string path, QWidget *parent)
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+    connect(this, SIGNAL(textChanged()), SLOT(parser()));
 
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
@@ -103,6 +104,15 @@ std::string Editor::name() const {
     return m_name;
 }
 
+void Editor::parser(){
+
+    QString str(this->toPlainText());
+    YY_BUFFER_STATE bufferState = yy_scan_string(str.toUtf8().constData());
+    yyparse();
+
+    yy_delete_buffer(bufferState);
+
+}
 
 void Editor::setCompleter(QCompleter *completer)
 {

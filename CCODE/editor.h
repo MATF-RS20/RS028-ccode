@@ -7,6 +7,8 @@
 #include <QTextBlock>
 #include <QListWidgetItem>
 #include "linenumberarea.h"
+#include "parser.h"
+#include "lexer.h"
 #include <QCompleter>
 #include <QScrollBar>
 
@@ -34,6 +36,7 @@ private slots:
     void updateLineNumberAreaWidth(int newBlockCount);
     void highlightCurrentLine();
     void updateLineNumberArea(const QRect &, int);
+    void parser();
     void insertCompletion(const QString &completion);
 
 private:

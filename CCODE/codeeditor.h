@@ -10,6 +10,7 @@
 #include "editor.h"
 #include "highlighter.h"
 
+
 class CodeEditor : public QBoxLayout
 {
     Q_OBJECT
