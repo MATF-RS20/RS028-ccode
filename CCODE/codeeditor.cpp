@@ -55,6 +55,15 @@ Editor* CodeEditor::active() {
     return m_active;
 }
 
+bool CodeEditor::maybeSave(){
+    bool all_saved=true;
+    for(unsigned i =0; i<m_editors.size();i++){
+        all_saved=m_editors[i]->maybeSave();
+        if(!all_saved)
+            break;
+    }
+    return all_saved;
+}
 
 
 

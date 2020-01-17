@@ -7,13 +7,13 @@ Editor::Editor(std::string path, QWidget *parent)
       m_path(path)
 {
 
-    m_name = !path.empty() ? path : "United"; //TODO: extract base file name from file path
+    m_name = !path.empty() ? path : "Untitled"; //TODO: extract base file name from file path
     setText(QString::fromStdString(m_name));
 
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
-    connect(this, SIGNAL(textChanged()), SLOT(parser()));
+    connect(this, SIGNAL(textChanged()),this, SLOT(parser()));
 
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
@@ -105,7 +105,7 @@ std::string Editor::name() const {
 }
 
 void Editor::parser(){
-
+    is_change =true;
     QString str(this->toPlainText());
     YY_BUFFER_STATE bufferState = yy_scan_string(str.toUtf8().constData());
     yyparse();
@@ -209,3 +209,72 @@ void Editor::keyPressEvent(QKeyEvent *e){
                 + c->popup()->verticalScrollBar()->sizeHint().width());
     c->complete(cr); // popup it up!
 }
+
+bool Editor::maybeSave(){
+    if(!this->document()->isModified())
+        return true;
+
+    std::string save_message = "Save changes to document \"" + m_name + "\" before closing?\n ";
+            QString qstr = QString::fromStdString(save_message);
+
+    const QMessageBox::StandardButton ret
+                = QMessageBox::warning(this, tr("Save Document"),
+                                       QString::fromStdString(save_message),
+                                       QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+    switch (ret) {
+    case QMessageBox::Save:
+        save();
+        return true;
+    case QMessageBox::Cancel:
+        return false;
+        default:
+        break;
+    }
+    return true;
+
+}
+
+
+void Editor::save(){
+    if(0==m_name.compare("Untitled")){
+        save_as();
+    }
+    else {
+        QFile file(QString::fromStdString(m_path));
+        if(!file.open(QFile::WriteOnly | QFile::Text)){
+            QMessageBox::warning(this, "Warning", "Cannot save file: "+file.errorString());
+            return;
+        }
+        QTextStream out(&file);
+        QString text = this->toPlainText();
+        out<<text;
+        file.close();
+
+    }
+
+
+    this->document()->setModified(false);
+    setWindowModified(false);
+}
+
+void Editor::save_as(){
+    QString filename = QFileDialog::getSaveFileName(this, "Save as");
+    QFile file(filename);
+    if(!file.open(QFile::WriteOnly | QFile::Text)){
+        QMessageBox::warning(this, "Warning", "Cannot save file: "+file.errorString());
+        return;
+    }
+    QFileInfo fileinfo(file.fileName());
+    QString f(fileinfo.fileName());
+    m_name = f.toUtf8().constData();
+    m_path = filename.toUtf8().constData();
+
+
+    setText(QString::fromStdString(m_name));
+    QTextStream out(&file);
+    QString text = this->toPlainText();
+    out<<text;
+    file.close();
+}
+
+

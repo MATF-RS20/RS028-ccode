@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
     codeEditor->addEditor(editor);
     codeEditor->addEditor(new Editor());
 
+
     SideBar* sideBar = SideBar::instance();
 
     QBoxLayout layaout(QBoxLayout::LeftToRight, w.centralWidget());

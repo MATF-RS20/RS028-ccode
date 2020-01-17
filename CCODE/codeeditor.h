@@ -22,6 +22,7 @@ public:
     std::vector<Editor*> editors();
     void setActive(Editor *editor);
     Editor* active();
+    bool maybeSave();
 
 signals:
 private:

@@ -11,6 +11,9 @@
 #include "lexer.h"
 #include <QCompleter>
 #include <QScrollBar>
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QTextStream>
 
 
 class Editor : public QPlainTextEdit, public QListWidgetItem
@@ -25,7 +28,9 @@ public:
     std::string name() const;
     void setCompleter(QCompleter *c);
     QCompleter *completer() const;
-
+    bool maybeSave();
+    void save();
+    void save_as();
 
 protected:
     void resizeEvent(QResizeEvent *event);
@@ -43,6 +48,7 @@ private:
     QWidget *m_lineNumberArea;
     std::string m_path;
     std::string m_name;
+    bool is_change;
     QString textUnderCursor() const;
     QCompleter *c = nullptr;
 };
