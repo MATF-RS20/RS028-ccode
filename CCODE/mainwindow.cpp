@@ -17,6 +17,15 @@ QWidget* MainWindow::centralWidget() {
 }
 
 
+void MainWindow::closeEvent(QCloseEvent *event){
+    if (CodeEditor::instance()->maybeSave()) {
+            event->accept();
+        } else {
+            event->ignore();
+        }
+}
+
+
 //void MainWindow::on_actionNew_triggered()
 //{
 //    currenFile.clear();
@@ -87,3 +96,31 @@ QWidget* MainWindow::centralWidget() {
 //    std::cout << text.toUtf8().constData() << std::endl;
 
 //}
+
+void MainWindow::on_actionExit_triggered()
+{
+    if (CodeEditor::instance()->maybeSave()) {
+        QApplication::quit();
+    }
+}
+
+
+
+void MainWindow::on_actionNew_2_triggered()
+{
+    CodeEditor* codeEditor = CodeEditor::instance();
+    Editor* editor = new Editor();
+    codeEditor->addEditor(editor);
+    OpenDocuments::instance()->addItem(editor);
+}
+
+void MainWindow::on_actionSave_triggered()
+{
+    CodeEditor::instance()->active()->save();
+}
+
+
+void MainWindow::on_actionSave_As_triggered()
+{
+    CodeEditor::instance()->active()->save_as();
+}
