@@ -17,6 +17,9 @@ Editor::Editor(std::string path, QWidget *parent)
 
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
+    setColor();
+
+
 }
 
 int Editor::lineNumberAreaWidth()
@@ -76,10 +79,20 @@ void Editor::highlightCurrentLine()
     setExtraSelections(extraSelections);
 }
 
+void Editor::setColor()
+{
+    QPalette p = this->palette();
+
+    p.setColor(QPalette::Active, QPalette::Base, QColor(227, 242, 255));
+    p.setColor(QPalette::Inactive, QPalette::Base, QColor(185, 185, 190));
+
+    this->setPalette(p);
+}
+
 void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     QPainter painter(m_lineNumberArea);
-    painter.fillRect(event->rect(), Qt::lightGray);
+    painter.fillRect(event->rect(), QColor(192, 171, 203));
     QTextBlock block = firstVisibleBlock();
         int blockNumber = block.blockNumber();
         int top = (int) blockBoundingGeometry(block).translated(contentOffset()).top();
@@ -258,6 +271,7 @@ void Editor::save(){
 }
 
 void Editor::save_as(){
+
     QString filename = QFileDialog::getSaveFileName(this, "Save as");
     QFile file(filename);
     if(!file.open(QFile::WriteOnly | QFile::Text)){

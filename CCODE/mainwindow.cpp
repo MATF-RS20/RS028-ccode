@@ -1,12 +1,20 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QWindow>
+#include <QIcon>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
 }
+
+
+
+
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -102,6 +110,7 @@ void MainWindow::on_actionExit_triggered()
     if (CodeEditor::instance()->maybeSave()) {
         QApplication::quit();
     }
+
 }
 
 
@@ -123,4 +132,9 @@ void MainWindow::on_actionSave_triggered()
 void MainWindow::on_actionSave_As_triggered()
 {
     CodeEditor::instance()->active()->save_as();
+}
+
+void MainWindow::on_actionsave_All_triggered()
+{
+    CodeEditor::instance()->saveAll();
 }

@@ -9,6 +9,7 @@ CodeEditor::CodeEditor(QBoxLayout::Direction dir, QWidget *parent)
     completer->setModelSorting(QCompleter::CaseSensitivelySortedModel);
     completer->setCaseSensitivity(Qt::CaseInsensitive);
 
+
 }
 
 CodeEditor::~CodeEditor() {
@@ -65,7 +66,11 @@ bool CodeEditor::maybeSave(){
     return all_saved;
 }
 
-
+void CodeEditor::saveAll(){
+    for(unsigned i =0; i<m_editors.size();i++){
+        m_editors[i]->save();
+    }
+}
 
 QAbstractItemModel *CodeEditor::modelFromFile(const QString& fileName)
 {
