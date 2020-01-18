@@ -51,6 +51,7 @@ private:
     bool is_change;
     QString textUnderCursor() const;
     QCompleter *c = nullptr;
+    void setColor();
 };
 
 #endif

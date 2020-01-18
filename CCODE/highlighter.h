@@ -24,11 +24,12 @@ private:
     QRegularExpression commentEndExpression;
 
     QTextCharFormat keywordFormat;
-    QTextCharFormat classFormat;
+    QTextCharFormat macroFormat;
     QTextCharFormat singleLineCommentFormat;
     QTextCharFormat multiLineCommentFormat;
     QTextCharFormat quotationFormat;
     QTextCharFormat functionFormat;
+    QTextCharFormat digitFormat;
 
 
 };

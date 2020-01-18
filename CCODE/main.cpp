@@ -15,6 +15,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     w.setWindowTitle("CCODE");
+    const QIcon icon = QIcon(":/images/CCODE.png");
+    w.setWindowIcon(icon);
 
     CodeEditor* codeEditor = CodeEditor::instance();
     Editor* editor = new Editor();

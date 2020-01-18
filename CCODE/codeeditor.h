@@ -23,6 +23,7 @@ public:
     void setActive(Editor *editor);
     Editor* active();
     bool maybeSave();
+    void saveAll();
 
 signals:
 private:

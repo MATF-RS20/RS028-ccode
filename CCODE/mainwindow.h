@@ -32,6 +32,8 @@ private slots:
 
     void on_actionSave_As_triggered();
 
+    void on_actionsave_All_triggered();
+
 private:
     Ui::MainWindow *ui;
     void closeEvent(QCloseEvent *event) override;

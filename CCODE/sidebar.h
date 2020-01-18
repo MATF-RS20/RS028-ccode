@@ -18,6 +18,7 @@ private:
     QSizePolicy m_sizePolicy;
     QBoxLayout* m_layout;
     OpenDocuments* m_openDocuments;
+    void setColor();
 };
 
 #endif // SIDEBAR_H

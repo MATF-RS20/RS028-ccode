@@ -25,34 +25,41 @@ Highlighter::Highlighter(QTextDocument *parent)
             rule.pattern = QRegularExpression(pattern);
             rule.format = keywordFormat;
             highlightingRules.append(rule);
-        }
+     }
 
-    classFormat.setFontWeight(QFont::Bold);
-        classFormat.setForeground(Qt::darkMagenta);
-        rule.pattern = QRegularExpression(QStringLiteral("\\bQ[A-Za-z]+\\b"));
-        rule.format = classFormat;
-        highlightingRules.append(rule);
+     macroFormat.setFontWeight(QFont::Bold);
+     macroFormat.setForeground(Qt::darkMagenta);
+     rule.pattern = QRegularExpression(QStringLiteral("\\b\#[A-Za-z]+\\b"));
+     rule.format = macroFormat;
+     highlightingRules.append(rule);
 
-        quotationFormat.setForeground(Qt::darkGreen);
-        rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
-        rule.format = quotationFormat;
-        highlightingRules.append(rule);
+     digitFormat.setFontWeight(QFont::Bold);
+     digitFormat.setForeground(Qt::darkGreen);
+     rule.pattern = QRegularExpression(QStringLiteral("\\b[0-9]+\\b"));
+     rule.format = digitFormat;
+     highlightingRules.append(rule);
 
-        functionFormat.setFontItalic(true);
-        functionFormat.setForeground(Qt::blue);
-        rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Za-z0-9_]+(?=\\()"));
-        rule.format = functionFormat;
-        highlightingRules.append(rule);
 
-        singleLineCommentFormat.setForeground(Qt::red);
-            rule.pattern = QRegularExpression(QStringLiteral("//[^\n]*"));
-            rule.format = singleLineCommentFormat;
-            highlightingRules.append(rule);
+     quotationFormat.setForeground(Qt::darkGreen);
+     rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
+     rule.format = quotationFormat;
+     highlightingRules.append(rule);
 
-            multiLineCommentFormat.setForeground(Qt::red);
+     functionFormat.setFontItalic(true);
+     functionFormat.setForeground(Qt::blue);
+     rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Za-z0-9_]+(?=\\()"));
+     rule.format = functionFormat;
+     highlightingRules.append(rule);
 
-            commentStartExpression = QRegularExpression(QStringLiteral("/\\*"));
-            commentEndExpression = QRegularExpression(QStringLiteral("\\*/"));
+     singleLineCommentFormat.setForeground(Qt::red);
+     rule.pattern = QRegularExpression(QStringLiteral("//[^\n]*"));
+     rule.format = singleLineCommentFormat;
+     highlightingRules.append(rule);
+
+     multiLineCommentFormat.setForeground(Qt::red);
+
+     commentStartExpression = QRegularExpression(QStringLiteral("/\\*"));
+     commentEndExpression = QRegularExpression(QStringLiteral("\\*/"));
 
 
 }
