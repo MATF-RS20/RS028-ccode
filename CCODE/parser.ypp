@@ -1,14 +1,20 @@
 %{
 
+#include <word_adding.h>
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <ctype.h>
+#include <map>
 #define YYDEBUG 1
 
 extern int yylex();
 extern int lineNum;
 extern char* yytext;
+
+word_adding w;
+std::map<std::string,int> words;
+
+
 void yyerror(const char *s)
 {
     if(!isgraph(yytext[0])) {
@@ -16,6 +22,8 @@ void yyerror(const char *s)
     }else {
     std::cout << s << "Line: " << lineNum << " " << yytext << " nije ocekivan"<< std::endl;
     }
+
+    w.word_checking(words);
 }
 
 
@@ -50,6 +58,7 @@ int swith_active=0;
     int i;
     float f;
 
+
 }
 %token <s> STRING_LITERAL IDENTIFIER LIBRARY
 %token <i> I_CONSTANT
@@ -72,7 +81,7 @@ int swith_active=0;
 
 %token INCLUDE END_OF_FILE
 
-%type <s> type_specifier assigment_operator unary_operator
+%type <s> type_specifier assigment_operator unary_operator function_name direct_declarator
 
 
 
@@ -108,7 +117,7 @@ int swith_active=0;
 %%
 
 begin
-    : {lineNum=1;}include_declaration {std::cout << "\n---------------\n" << "idemoooooooooo" << std::endl;}
+    : {lineNum=1;}include_declaration {w.word_checking(words);}
     ;
 
 include_declaration
@@ -135,15 +144,29 @@ external_declaration
 
 
 function_definition
-: declaration_specifiers function_name '(' arguments ')' compound_statement {
+    : declaration_specifiers function_name '(' arguments ')' compound_statement {
+    {   if(!words.count(*$2))
+                                       words[*$2]=1;
+                                   else {
+                                       words[*$2]++;
+                                   }
+                               }
 
       }
-    | declaration_specifiers function_name '('')' compound_statement
+    | declaration_specifiers function_name '('')' compound_statement{
+                                           {   if(!words.count(*$2))
+                                                                              words[*$2]=1;
+                                                                          else {
+                                                                              words[*$2]++;
+                                                                          }
+                                                                      }
+
+                                             }
     ;
 
 function_name
     : IDENTIFIER
-    | pointer IDENTIFIER
+    | pointer IDENTIFIER {$$=$2;}
     ;
 
 arguments
@@ -176,8 +199,20 @@ type_specifier
     ;
 
 declarator
-    : pointer direct_declarator
-    | direct_declarator
+    : pointer direct_declarator {   if(!words.count(*$2))
+                                   words[*$2]=1;
+                               else {
+                                   words[*$2]++;
+                               }
+                           }
+
+    | direct_declarator {   if(!words.count(*$1))
+                                           words[*$1]=1;
+                                       else {
+                                           words[*$1]++;
+                                       }
+                                   }
+
     ;
 
 direct_declarator

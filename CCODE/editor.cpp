@@ -105,8 +105,8 @@ std::string Editor::name() const {
 }
 
 void Editor::parser(){
-    is_change =true;
     QString str(this->toPlainText());
+
     YY_BUFFER_STATE bufferState = yy_scan_string(str.toUtf8().constData());
     yyparse();
 

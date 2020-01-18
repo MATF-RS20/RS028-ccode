@@ -48,7 +48,6 @@ private:
     QWidget *m_lineNumberArea;
     std::string m_path;
     std::string m_name;
-    bool is_change;
     QString textUnderCursor() const;
     QCompleter *c = nullptr;
 };
