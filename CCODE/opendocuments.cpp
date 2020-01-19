@@ -1,7 +1,7 @@
 #include "opendocuments.h"
 #include <iostream>
 
-OpenDocuments* OpenDocuments::m_instance = 0;
+OpenDocuments* OpenDocuments::m_instance = nullptr;
 
 OpenDocuments::OpenDocuments(QListWidget *parent) : QListWidget(parent)
 {

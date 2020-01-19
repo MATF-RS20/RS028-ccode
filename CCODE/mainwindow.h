@@ -34,6 +34,20 @@ private slots:
 
     void on_actionsave_All_triggered();
 
+    void on_actionFont_triggered();
+
+    void on_actionOpen_triggered();
+
+    void on_actionUndo_triggered();
+
+    void on_actionRedo_triggered();
+
+    void on_actionCopy_triggered();
+
+    void on_actionPaste_triggered();
+
+    void on_actionCut_triggered();
+
 private:
     Ui::MainWindow *ui;
     void closeEvent(QCloseEvent *event) override;

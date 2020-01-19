@@ -18,6 +18,8 @@ WS  [ \t\v\f]
 
 %{
 //({SP}?\"([^"\\\n]|{ES})*\"{WS}*)+	{ return STRING_LITERAL; }
+
+#include <parsererror.h>
 #include <iostream>
 #include "parser.h"
 #include <vector>

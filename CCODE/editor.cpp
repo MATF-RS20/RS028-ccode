@@ -1,26 +1,29 @@
 #include "editor.h"
 
+#include <iostream>
 Editor::Editor(std::string path, QWidget *parent)
     : QPlainTextEdit(parent),
       QListWidgetItem(),
       m_lineNumberArea(new LineNumberArea(this)),
       m_path(path)
 {
-
-    m_name = !path.empty() ? path : "Untitled"; //TODO: extract base file name from file path
+    if(!path.empty()){
+        std::size_t found = path.find_last_of("/\\");
+        m_name=path.substr(found+1);
+    }
+    else
+        m_name="Untitled";
     setText(QString::fromStdString(m_name));
-
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
-    connect(this, SIGNAL(textChanged()),this, SLOT(parser()));
+    connect(this, SIGNAL(textChanged()),this, SLOT(on_change()));
 
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
     setColor();
-
-
 }
+
 
 int Editor::lineNumberAreaWidth()
 {
@@ -117,13 +120,18 @@ std::string Editor::name() const {
     return m_name;
 }
 
-void Editor::parser(){
-    is_change =true;
+void Editor::on_change(){
+
     QString str(this->toPlainText());
+
     YY_BUFFER_STATE bufferState = yy_scan_string(str.toUtf8().constData());
     yyparse();
 
     yy_delete_buffer(bufferState);
+
+    c->setModel(modelFromFile(":/resources/wordlist.txt"));
+    c->setModelSorting(QCompleter::CaseSensitivelySortedModel);
+    c->setCaseSensitivity(Qt::CaseInsensitive);
 
 }
 
@@ -136,6 +144,10 @@ void Editor::setCompleter(QCompleter *completer)
 
     if (!c)
         return;
+
+    c->setModel(modelFromFile(":/resources/wordlist.txt"));
+    c->setModelSorting(QCompleter::CaseSensitivelySortedModel);
+    c->setCaseSensitivity(Qt::CaseInsensitive);
 
     c->setWidget(this);
     c->setCompletionMode(QCompleter::PopupCompletion);
@@ -206,7 +218,7 @@ void Editor::keyPressEvent(QKeyEvent *e){
     const bool hasModifier = (e->modifiers() != Qt::NoModifier) && !ctrlOrShift;
     QString completionPrefix = textUnderCursor();
 
-    if (!isShortcut && (hasModifier || e->text().isEmpty()|| completionPrefix.length() < 3
+    if (!isShortcut && (hasModifier || e->text().isEmpty()|| completionPrefix.length() < 2
                         || eow.contains(e->text().right(1)))) {
         c->popup()->hide();
         return;
@@ -222,6 +234,35 @@ void Editor::keyPressEvent(QKeyEvent *e){
                 + c->popup()->verticalScrollBar()->sizeHint().width());
     c->complete(cr); // popup it up!
 }
+
+QAbstractItemModel *Editor::modelFromFile(const QString& fileName)
+{
+    QFile file(fileName);
+    if (!file.open(QFile::ReadOnly))
+        return new QStringListModel(c);
+
+#ifndef QT_NO_CURSOR
+    QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+#endif
+    QStringList words;
+
+    while (!file.atEnd()) {
+        QByteArray line = file.readLine();
+        if (!line.isEmpty())
+            words << QString::fromUtf8(line.trimmed());
+    }
+    for(auto w : this->words){
+        words << QString::fromStdString(w);
+    }
+    words.sort();
+
+#ifndef QT_NO_CURSOR
+    QGuiApplication::restoreOverrideCursor();
+#endif
+    return new QStringListModel(words, c);
+}
+
+
 
 bool Editor::maybeSave(){
     if(!this->document()->isModified())
