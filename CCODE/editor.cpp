@@ -74,6 +74,11 @@ void Editor::highlightCurrentLine()
         selection.cursor = textCursor();
         selection.cursor.clearSelection();
         extraSelections.append(selection);
+        auto pos = document()->findBlockByLineNumber(3).position();
+        auto c = QTextCursor(document());
+        selection.cursor = c;
+        extraSelections.append(selection);
+
     }
 
     setExtraSelections(extraSelections);
@@ -121,7 +126,7 @@ void Editor::parser(){
     is_change =true;
     QString str(this->toPlainText());
     YY_BUFFER_STATE bufferState = yy_scan_string(str.toUtf8().constData());
-    yyparse();
+//    yyparse();
 
     yy_delete_buffer(bufferState);
 

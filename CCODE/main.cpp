@@ -8,7 +8,13 @@
 #include "editor.h"
 #include "sidebar.h"
 #include "codeeditor.h"
-
+#include <QFileSystemModel>
+#include <QTreeView>
+#include <QDirModel>
+#include <QSplitter>
+#include <QStringListModel>
+#include <QStringList>
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
@@ -30,9 +36,20 @@ int main(int argc, char *argv[])
 
     QBoxLayout layaout(QBoxLayout::LeftToRight, w.centralWidget());
 
+    QDirModel* model = new QDirModel();
+
+    auto index = model->index("/Users");
+    auto path = model->filePath(index);
+    std::cout << path.toUtf8().constData() << std::endl;
+    model->setSorting(QDir::DirsFirst | QDir::IgnoreCase | QDir::Name);
+
+
     layaout.addWidget(sideBar);
 
     layaout.addLayout(codeEditor, 5);
+
+
+
     w.show();
 
     return a.exec();

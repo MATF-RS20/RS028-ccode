@@ -1,7 +1,7 @@
 QT       += core gui \
     quick
 
-LIBS += -lfl
+#LIBS += -lfl
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
@@ -36,6 +36,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     opendocuments.cpp \
+    project.cpp \
     sidebar.cpp
 
 HEADERS += \
@@ -45,6 +46,7 @@ HEADERS += \
     linenumberarea.h \
     mainwindow.h \
     opendocuments.h \
+    project.h \
     sidebar.h
 
 FORMS += \
