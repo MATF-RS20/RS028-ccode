@@ -4,6 +4,8 @@
 #include <codeeditor.h>
 #include <iostream>
 #include <set>
+#include <QFile>
+#include <QStringList>
 #define YYDEBUG 1
 
 extern int yylex();
@@ -11,10 +13,12 @@ extern int lineNum;
 extern char* yytext;
 
 std::set<std::string> table;
-
+int loop_active;
+int swith_active;
 ParserError pe;
 
-
+QStringList library;
+bool inicialized=false;
 
 void yyerror(const char *s)
 {
@@ -29,8 +33,52 @@ void yyerror(const char *s)
 
 
 
-int loop_active;
-int swith_active;
+
+
+void inicialize_library(){
+    QFile file(":/library/C_standard_lib.txt");
+    if(!file.open(QIODevice::ReadOnly | QFile::Text)){
+        std::cout << "can't open file";
+        return;
+    }
+    while (!file.atEnd()) {
+        QByteArray line = file.readLine();
+        if (!line.isEmpty())
+            library << (QString::fromUtf8(line.trimmed()));
+    }
+    file.close();
+    inicialized=true;
+}
+
+void load_words(std::string fileName){
+    std::cout << fileName << std::endl;
+    QFile file(QString::fromStdString(":/library/" + fileName));
+    if(!file.open(QIODevice::ReadOnly | QFile::Text)){
+        std::cout << "can't open file " << fileName;
+
+        return;
+    }
+    std::string s;
+    while (!file.atEnd()) {
+        QByteArray line = file.readLine();
+        if (!line.isEmpty()){
+            s.assign((QString::fromUtf8(line.trimmed())).toUtf8().constData());
+            CodeEditor::instance()->active()->words.insert(s);
+            std::size_t found = s.find_first_of("/\(");
+            if(found>0)
+                table.insert(s.substr(0,found));
+            else {
+                table.insert(s);
+            }
+        }
+    }
+    file.close();
+}
+
+
+
+
+
 
 
 
@@ -102,6 +150,9 @@ int swith_active;
 
 begin
     : {
+        if(inicialized==false){
+                inicialize_library();
+        }
         lineNum=1;
         CodeEditor::instance()->active()->words.clear();
         swith_active=0;
@@ -118,7 +169,12 @@ include_declaration
 
 include_row
     : '#' INCLUDE STRING_LITERAL
-    | '#' INCLUDE LIBRARY
+    | '#' INCLUDE LIBRARY       {
+              if(library.contains(QString::fromStdString("<" + *$3 + ">"))){
+                std::size_t found = (*$3).find_last_of("/\.");
+                load_words((*$3).substr(0,found));
+              }
+              }
     ;
 
 

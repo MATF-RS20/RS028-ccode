@@ -1,0 +1,7 @@
+    NULL
+    offsetof
+    max_align_t
+    nullptr_t
+    ptrdiff_t
+    size_t
+

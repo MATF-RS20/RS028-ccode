@@ -9,11 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-
 }
-
-
 
 
 MainWindow::~MainWindow()
@@ -162,7 +158,6 @@ void MainWindow::on_actionOpen_triggered()
     OpenDocuments::instance()->addItem(editor);
     QTextStream in(&file);
     QString text = in.readAll();
-    //editor->setText(text);
     CodeEditor::instance()->active()->setPlainText(text);
     file.close();
 

@@ -1,5 +1,6 @@
 #ifndef PARSERERROR_H
 #define PARSERERROR_H
+#include <QMessageBox>
 
 #include <iostream>
 #include <QLineEdit>

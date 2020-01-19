@@ -13,5 +13,6 @@ void ParserError::add(std::string err){
 }
 
 void ParserError::good(std::string msg){
+
     std::cout << msg << " ";
 }

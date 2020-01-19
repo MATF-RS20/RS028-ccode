@@ -2,4 +2,26 @@
     <qresource prefix="/resources">
         <file>wordlist.txt</file>
     </qresource>
+    <qresource prefix="/library">
+        <file>C_standard_lib.txt</file>
+        <file>assert</file>
+        <file>math</file>
+        <file>ctype</file>
+        <file>errno</file>
+        <file>fenv</file>
+        <file>float</file>
+        <file>inttypes</file>
+        <file>iso646</file>
+        <file>locale</file>
+        <file>setjmp</file>
+        <file>signal</file>
+        <file>stdatomic</file>
+        <file>stdbool</file>
+        <file>stdio</file>
+        <file>stdlib</file>
+        <file>tgmath</file>
+        <file>time</file>
+        <file>wchar</file>
+        <file>wctype</file>
+    </qresource>
 </RCC>

@@ -1,0 +1,17 @@
+PRIxMAX	
+PRIxN
+PRIxLEASTN
+PRIxFASTN
+PRIxPTR	
+SCNxMAX
+SCNxN
+SCNxLEASTN
+SCNxFASTN
+SCNxPTR
+imaxdiv_t
+imaxabs ()
+imaxdiv ()
+strtoimax ()
+strtoumax ()
+wcstoimax ()
+wcstoumax ()
