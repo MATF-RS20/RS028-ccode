@@ -5,9 +5,6 @@ CodeEditor::CodeEditor(QBoxLayout::Direction dir, QWidget *parent)
 {
     highlighter=new Highlighter();
     completer = new QCompleter(this);
-    completer->setModel(modelFromFile(":/resources/wordlist.txt"));
-    completer->setModelSorting(QCompleter::CaseSensitivelySortedModel);
-    completer->setCaseSensitivity(Qt::CaseInsensitive);
 
 
 }
@@ -16,7 +13,7 @@ CodeEditor::~CodeEditor() {
     std::for_each(m_editors.begin(), m_editors.end(), [](Editor* e){ delete e; });
 }
 
-CodeEditor* CodeEditor::m_instance = 0;
+CodeEditor* CodeEditor::m_instance = nullptr;
 
 CodeEditor* CodeEditor::instance(QWidget *parent)
 {
@@ -72,25 +69,11 @@ void CodeEditor::saveAll(){
     }
 }
 
-QAbstractItemModel *CodeEditor::modelFromFile(const QString& fileName)
-{
-    QFile file(fileName);
-    if (!file.open(QFile::ReadOnly))
-        return new QStringListModel(completer);
+void CodeEditor::changeFont(QFont f){
 
-#ifndef QT_NO_CURSOR
-    QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-#endif
-    QStringList words;
-
-    while (!file.atEnd()) {
-        QByteArray line = file.readLine();
-        if (!line.isEmpty())
-            words << QString::fromUtf8(line.trimmed());
-    }
-
-#ifndef QT_NO_CURSOR
-    QGuiApplication::restoreOverrideCursor();
-#endif
-    return new QStringListModel(words, completer);
+    m_active->QWidget::setFont(f);
 }
+
+
+
+

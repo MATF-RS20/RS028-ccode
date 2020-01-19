@@ -27,11 +27,11 @@ Highlighter::Highlighter(QTextDocument *parent)
             highlightingRules.append(rule);
      }
 
-     macroFormat.setFontWeight(QFont::Bold);
-     macroFormat.setForeground(Qt::darkMagenta);
-     rule.pattern = QRegularExpression(QStringLiteral("\\b\#[A-Za-z]+\\b"));
-     rule.format = macroFormat;
-     highlightingRules.append(rule);
+//     macroFormat.setFontWeight(QFont::Bold);
+//     macroFormat.setForeground(Qt::darkMagenta);
+//     rule.pattern = QRegularExpression(QStringLiteral("\\b\#[A-Za-z]+\\b"));
+//     rule.format = macroFormat;
+//     highlightingRules.append(rule);
 
      digitFormat.setFontWeight(QFont::Bold);
      digitFormat.setForeground(Qt::darkGreen);

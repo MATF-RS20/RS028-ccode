@@ -5,10 +5,9 @@
 #include <algorithm>
 #include <QWidget>
 #include <QBoxLayout>
-#include <QStringListModel>
-#include <QGuiApplication>
 #include "editor.h"
 #include "highlighter.h"
+#include <QFont>
 
 
 class CodeEditor : public QBoxLayout
@@ -24,6 +23,8 @@ public:
     Editor* active();
     bool maybeSave();
     void saveAll();
+    void changeFont(QFont f);
+
 
 signals:
 private:
@@ -32,9 +33,9 @@ private:
     std::vector<Editor*> m_editors;
     Editor *m_active = nullptr;
     Highlighter *highlighter;
-
     QCompleter *completer =nullptr;
-    QAbstractItemModel *modelFromFile(const QString& fileName);
+
+
 
 };
 
