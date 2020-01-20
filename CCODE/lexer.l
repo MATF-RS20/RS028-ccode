@@ -1,6 +1,7 @@
 %option nounput
 
-
+L   [a-zA-Z_]
+A   [a-zA-Z_0-9]
 WS  [ \t\v\f]
 
 %{
@@ -12,7 +13,11 @@ WS  [ \t\v\f]
 int lineNum=1;
 
 extern void yyerror(const char *);  /* prints grammar violation message */
+extern int sym_type(const char*);
 
+#define sym_type(identifier) IDENTIFIER
+
+static int check_type(void);
 
 %}
 
@@ -110,6 +115,7 @@ extern void yyerror(const char *);  /* prints grammar violation message */
                                             return LIBRARY; 
                                         }
 
+{L}{A}+                                 {return check_type();}
 
 
 ([1-9][0-9]*)|0                             {   yylval.i = atoi(yytext);
@@ -137,6 +143,19 @@ int yywrap(void)        /* called at end of input */
     return 1;           /* terminate now */
 }
 
-
+static int check_type(void)
+{
+    switch (sym_type(yytext))
+    {
+        case TYPEDEF_NAME:
+            return TYPEDEF_NAME;
+        case ENUMERATION_CONSTANT:
+            return ENUMERATION_CONSTANT;
+    default:{
+        yylval.s=new std::string(yytext);
+        return IDENTIFIER;
+        }
+    }
+}
 
 
