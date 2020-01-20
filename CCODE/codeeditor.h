@@ -8,6 +8,7 @@
 #include "editor.h"
 #include "highlighter.h"
 #include <QFont>
+#include <parsererror.h>
 
 
 class CodeEditor : public QBoxLayout
@@ -24,6 +25,7 @@ public:
     bool maybeSave();
     void saveAll();
     void changeFont(QFont f);
+    ParserError *pe = nullptr;
 
 
 signals:
@@ -34,6 +36,7 @@ private:
     Editor *m_active = nullptr;
     Highlighter *highlighter;
     QCompleter *completer =nullptr;
+
 
 
 

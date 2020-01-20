@@ -1,6 +1,5 @@
 #include "editor.h"
 
-#include <iostream>
 Editor::Editor(std::string path, QWidget *parent)
     : QPlainTextEdit(parent),
       QListWidgetItem(),
@@ -22,6 +21,7 @@ Editor::Editor(std::string path, QWidget *parent)
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
     setColor();
+    this->setTabStopDistance(40);
 }
 
 
@@ -132,6 +132,7 @@ void Editor::on_change(){
     c->setModel(modelFromFile(":/resources/wordlist.txt"));
     c->setModelSorting(QCompleter::CaseSensitivelySortedModel);
     c->setCaseSensitivity(Qt::CaseInsensitive);
+
 
 }
 

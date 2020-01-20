@@ -24,7 +24,6 @@ private:
     QRegularExpression commentEndExpression;
 
     QTextCharFormat keywordFormat;
-    QTextCharFormat macroFormat;
     QTextCharFormat singleLineCommentFormat;
     QTextCharFormat multiLineCommentFormat;
     QTextCharFormat quotationFormat;

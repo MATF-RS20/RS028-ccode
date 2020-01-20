@@ -1,4 +1,5 @@
 #include "highlighter.h"
+#include <QColor>
 
 Highlighter::Highlighter(QTextDocument *parent)
     :QSyntaxHighlighter(parent)
@@ -27,12 +28,6 @@ Highlighter::Highlighter(QTextDocument *parent)
             highlightingRules.append(rule);
      }
 
-//     macroFormat.setFontWeight(QFont::Bold);
-//     macroFormat.setForeground(Qt::darkMagenta);
-//     rule.pattern = QRegularExpression(QStringLiteral("\\b\#[A-Za-z]+\\b"));
-//     rule.format = macroFormat;
-//     highlightingRules.append(rule);
-
      digitFormat.setFontWeight(QFont::Bold);
      digitFormat.setForeground(Qt::darkGreen);
      rule.pattern = QRegularExpression(QStringLiteral("\\b[0-9]+\\b"));
@@ -51,7 +46,7 @@ Highlighter::Highlighter(QTextDocument *parent)
      rule.format = functionFormat;
      highlightingRules.append(rule);
 
-     singleLineCommentFormat.setForeground(Qt::red);
+     singleLineCommentFormat.setForeground( QColor(153, 0, 55));
      rule.pattern = QRegularExpression(QStringLiteral("//[^\n]*"));
      rule.format = singleLineCommentFormat;
      highlightingRules.append(rule);

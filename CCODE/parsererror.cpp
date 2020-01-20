@@ -2,17 +2,23 @@
 
 ParserError::ParserError()
 {
-//    a = new QDialog();
-//    a->show();
+    status = new QStatusBar();
+    label = new QLabel();
+    status->addPermanentWidget(label);
+    status->insertPermanentWidget(0,label);
 
 }
 
 
-void ParserError::add(std::string err){
-    std::cout << err << " ";
+void ParserError::message(std::string msg, bool correct){
+    if(correct)
+        label->setStyleSheet("QLabel {background-color : green;}");
+    else
+        label->setStyleSheet("QLabel {background-color : red;}");
+
+    label->setText(QString::fromStdString(msg));
+
+
 }
 
-void ParserError::good(std::string msg){
 
-    std::cout << msg << " ";
-}
