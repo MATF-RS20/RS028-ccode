@@ -1,0 +1,18 @@
+    asctime( )
+    clock( )
+    ctime( )
+    difftime( )
+    gmtime( )
+    localtime( ) 
+    mktime( )
+    strftime( )
+    time( )
+
+    CLOCKS_PER_SEC
+    NULL
+
+    clock_t
+    size_t
+    time_t
+    struct tm
+

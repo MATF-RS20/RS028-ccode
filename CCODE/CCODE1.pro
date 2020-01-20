@@ -37,8 +37,7 @@ SOURCES += \
     mainwindow.cpp \
     opendocuments.cpp \
     parsererror.cpp \
-    sidebar.cpp \
-    semantic.cpp
+    sidebar.cpp
 
 HEADERS += \
     codeeditor.h \
@@ -48,8 +47,7 @@ HEADERS += \
     mainwindow.h \
     opendocuments.h \
     parsererror.h \
-    sidebar.h \
-    semantic.hpp
+    sidebar.h
 
 FORMS += \
     mainwindow.ui

@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QFile>
 #include <QWidget>
+#include <QFontDialog>
 #include <codeeditor.h>
 #include <opendocuments.h>
 

@@ -8,6 +8,7 @@
 #include "editor.h"
 #include "sidebar.h"
 #include "codeeditor.h"
+#include "parsererror.h"
 
 
 int main(int argc, char *argv[])
@@ -21,9 +22,8 @@ int main(int argc, char *argv[])
     CodeEditor* codeEditor = CodeEditor::instance();
     Editor* editor = new Editor();
 
-
+    codeEditor->pe=new ParserError();
     codeEditor->addEditor(editor);
-    codeEditor->addEditor(new Editor());
 
 
     SideBar* sideBar = SideBar::instance();
@@ -33,6 +33,8 @@ int main(int argc, char *argv[])
     layaout.addWidget(sideBar);
 
     layaout.addLayout(codeEditor, 5);
+
+    w.setStatusBar(codeEditor->pe->status);
     w.show();
 
     return a.exec();

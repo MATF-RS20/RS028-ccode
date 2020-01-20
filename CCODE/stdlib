@@ -1,0 +1,53 @@
+        abort
+        abs
+        atexit
+        atof
+        atoi
+        atol
+        atoll
+        at_quick_exit
+        bsearch
+        calloc
+        div
+        exit
+        free
+        getenv
+        labs
+        ldiv
+        llabs
+        lldiv
+        malloc
+        mblen
+        mbstowcs
+        mbtowc
+        qsort
+        quick_exit
+        rand
+        realloc
+        srand
+        strtod
+        strtof
+        strtol
+        strtold
+        strtoll
+        strtoul
+        strtoull
+        system
+        wcstombs
+        wctomb
+        _Exit
+
+        itoa
+
+        div_t
+        ldiv_t
+        lldiv_t
+        size_t
+
+        EXIT_FAILURE
+        EXIT_SUCCESS
+        MB_CUR_MAX
+        NULL
+        RAND_MAX
+
+

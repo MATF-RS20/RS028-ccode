@@ -2,14 +2,21 @@
 #define PARSERERROR_H
 
 #include <iostream>
-#include <QLineEdit>
+#include <QStatusBar>
+#include <QLabel>
 class ParserError
 {
 public:
     ParserError();
-    void add(std::string err);
-    void good(std::string msg);
-    QDialog *a;
+    ParserError(ParserError &p){
+        status=p.status;
+        label=p.label;
+    }
+    void message(std::string msg, bool correct);
+    QStatusBar *status=nullptr;
+
+private:
+    QLabel *label;
 };
 
 #endif // PARSERERROR_H

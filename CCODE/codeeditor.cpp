@@ -5,11 +5,10 @@ CodeEditor::CodeEditor(QBoxLayout::Direction dir, QWidget *parent)
 {
     highlighter=new Highlighter();
     completer = new QCompleter(this);
-
-
 }
 
-CodeEditor::~CodeEditor() {
+CodeEditor::~CodeEditor()
+{
     std::for_each(m_editors.begin(), m_editors.end(), [](Editor* e){ delete e; });
 }
 
@@ -17,8 +16,7 @@ CodeEditor* CodeEditor::m_instance = nullptr;
 
 CodeEditor* CodeEditor::instance(QWidget *parent)
 {
-    if (!m_instance)
-    {
+    if (!m_instance){
         m_instance = new CodeEditor(QBoxLayout::TopToBottom, parent);
     }
 
@@ -27,7 +25,7 @@ CodeEditor* CodeEditor::instance(QWidget *parent)
 
 void CodeEditor::addEditor(Editor *editor)
 {
-    if (m_active) {
+    if (m_active){
         m_active->setVisible(false);
     }
     m_editors.push_back(editor);
@@ -37,11 +35,11 @@ void CodeEditor::addEditor(Editor *editor)
     m_active->setCompleter(completer);
 }
 
-std::vector<Editor*> CodeEditor::editors() {
+std::vector<Editor*> CodeEditor::editors(){
     return m_editors;
 }
 
-void CodeEditor::setActive(Editor *editor) {
+void CodeEditor::setActive(Editor *editor){
     m_active->setVisible(false);
     m_active = editor;
     editor->setVisible(true);

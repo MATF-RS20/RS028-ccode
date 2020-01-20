@@ -1,0 +1,26 @@
+        swalnum( )
+        iswalpha( )
+        iswblank( )
+        iswcntrl( )
+        iswctype( )
+        iswdigit( )
+        iswgraph( )
+        iswlower( )
+        iswprint( )
+        iswpunct( )
+        iswspace( )
+        iswupper( )
+        iswxdigit( )
+        towctrans( )
+        towlower( )
+        towupper( )
+        wctrans( )
+        wctype( )
+
+        wctrans_t
+        wctype_t
+        wint_t
+
+        WEOF
+
+

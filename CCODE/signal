@@ -1,0 +1,12 @@
+signal()
+raise()
+sig_atomic_t
+SIG_DFL
+SIG_ERR
+SIG_IGN
+SIGABRT
+SIGFPE
+SIGILL
+SIGINT
+SIGSEGV
+SIGTERM
