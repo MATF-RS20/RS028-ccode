@@ -31,8 +31,9 @@ void yyerror(const char *s)
         CodeEditor::instance()->pe->message(msg,correct);
         std::cout << s << "Line: " << lineNum << " kraj fajla nije ocekivan"<< std::endl;
     }else {
-        msg = "Line: ";
+        msg = "Line: " + std::to_string(lineNum) + ", " + yytext + " not expected";
         CodeEditor::instance()->pe->message(msg,correct);
+
         std::cout << s << "Line: " << lineNum << " " << yytext << " nije ocekivan"<< std::endl;
     }
 

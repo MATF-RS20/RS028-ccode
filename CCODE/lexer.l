@@ -1,11 +1,12 @@
 %option nounput
 
 
+L   [a-zA-Z_]
+A   [a-zA-Z_0-9]
 WS  [ \t\v\f]
 
 %{
-
-#include <parsererror.h>
+//({SP}?\"([^"\\\n]|{ES})*\"{WS}*)+	{ return STRING_LITERAL; }
 #include <iostream>
 #include "parser.h"
 
@@ -13,13 +14,18 @@ int lineNum=1;
 
 extern void yyerror(const char *);  /* prints grammar violation message */
 
+extern int sym_type(const char *);  /* returns type from symbol table */
 
+#define sym_type(identifier) IDENTIFIER /* with no symbol table, fake it */
+
+
+static int check_type(void);
 %}
 
 %%
 
 
-"include"               { return(INCLUDE); }
+"include"                               { return(INCLUDE); }
 
 "auto"					{ return(AUTO); }
 "break"					{ return(BREAK); }
@@ -102,14 +108,17 @@ extern void yyerror(const char *);  /* prints grammar violation message */
 "^"					{ return '^'; }
 "|"					{ return '|'; }
 "?"					{ return '?'; }
-"//".*              { /* DO NOTHING */ }
+"//".*              { /* DO NOTHING */}
 
-[<][^>]*[>]                              { 
+[<][^>]*[>]                              {
                                             std::string tmp(yytext);
                                             yylval.s = new std::string(tmp.substr(1, tmp.size() - 2));
-                                            return LIBRARY; 
+                                            return LIBRARY;
                                         }
 
+
+
+{L}{A}*					{ return check_type(); }
 
 
 ([1-9][0-9]*)|0                             {   yylval.i = atoi(yytext);
@@ -120,11 +129,11 @@ extern void yyerror(const char *);  /* prints grammar violation message */
                       std::string tmp(yytext);
                       yylval.s = new std::string(tmp.substr(1, tmp.size() - 2));
                       return STRING_LITERAL;  /* " */
-	           }
+               }
 
 
 [#]                                    {
-                                        return *yytext;}
+return *yytext;}
 
 {WS}+					{ /* whitespace separates tokens */ }
 [\n]                                    {lineNum++;}
@@ -138,5 +147,17 @@ int yywrap(void)        /* called at end of input */
 }
 
 
-
-
+static int check_type(void)
+{
+    switch (sym_type(yytext))
+    {
+    case TYPEDEF_NAME:                /* previously defined */
+        return TYPEDEF_NAME;
+    case ENUMERATION_CONSTANT:        /* previously defined */
+        return ENUMERATION_CONSTANT;
+    default:{/* includes undefined */
+        yylval.s=new std::string(yytext);
+        return IDENTIFIER;
+        }
+    }
+}
