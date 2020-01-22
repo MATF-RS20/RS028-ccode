@@ -6,7 +6,7 @@ i automatskog zavrsavanja kljucnih reci.
 ### Pokretanje
 Potrebno je imati instalirane programe bison i flex
 ### Autori:
-Luka Markovic,
-Tamara Radovanovic,
-Rade Aleksic
+Luka Markovic 423/2016,
+Tamara Radovanovic 430/2016,
+Rade Aleksic 399/2016
 
